@@ -4,7 +4,7 @@
 [![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-一个可复现的电商订单分析项目：从订单 CSV/Excel 中识别数据质量问题、标准化字段和金额口径，生成经营指标、分维度图表、Excel 工作簿、HTML 分析报告与校验记录。项目提供浏览器在线作品集、Streamlit 交互仪表盘和命令行批处理三种使用方式。
+一个可复现的电商订单分析工作台：从订单 CSV/Excel 中识别数据质量问题、标准化字段和金额口径，生成经营指标、分维度图表、Excel 工作簿、HTML 分析报告与校验记录。项目提供浏览器在线作品集、Streamlit 交互仪表盘和命令行批处理三种使用方式。
 
 > **数据声明：** 仓库中的示例订单、流量和商品目录均为固定随机种子生成的模拟数据，不包含真实企业、客户或交易信息。示例分析结论只用于展示方法和流程，不能代表真实经营表现。
 
@@ -26,9 +26,9 @@
 
 **GitHub Pages 在线 Demo：** [https://l-sd.github.io/ecommerce-analytics-agent/](https://l-sd.github.io/ecommerce-analytics-agent/)（无需登录）
 
-![电商分析仪表盘预览](docs/dashboard-preview.png)
+![电商订单分析工作台：经营总览页面预览](docs/dashboard-preview.png)
 
-![分析报告预览](docs/report-preview.png)
+![电商订单分析工作台：分析报告预览](docs/report-preview.png)
 
 在线页面默认读取仓库中的模拟数据，也可以在“经营总览”页上传自己的 CSV/TSV 订单文件试用。浏览器版不会把文件发送到服务器。Excel 文件请先另存为 CSV UTF-8；在线版单个文件上限为 20 MB。模板：[docs/order-upload-template.csv](docs/order-upload-template.csv)。
 
