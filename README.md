@@ -1,10 +1,12 @@
-# 电商订单分析工作台
+# E-commerce Analytics Toolkit
 
-[![CI](https://github.com/l-sd/ecommerce-analytics-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/l-sd/ecommerce-analytics-agent/actions/workflows/ci.yml)
+电商经营分析工作台：以可复现的数据清洗、经营指标和报告流程，帮助检查订单表现。
+
+[![CI](https://github.com/l-sd/ecommerce-analytics-toolkit/actions/workflows/ci.yml/badge.svg)](https://github.com/l-sd/ecommerce-analytics-toolkit/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-一个可复现的电商订单分析工作台：从订单 CSV/Excel 中识别数据质量问题、标准化字段和金额口径，生成经营指标、分维度图表、Excel 工作簿、HTML 分析报告与校验记录。项目提供浏览器在线作品集、Streamlit 交互仪表盘和命令行批处理三种使用方式。
+E-commerce Analytics Toolkit 是一个可复现的电商订单分析工作台：从订单 CSV/Excel 中识别数据质量问题、标准化字段和金额口径，生成经营指标、分维度图表、Excel 工作簿、HTML 分析报告与校验记录。项目提供浏览器在线作品集、Streamlit 交互仪表盘、命令行批处理和 Codex 项目 Skill 四种使用方式。
 
 > **数据声明：** 仓库中的示例订单、流量和商品目录均为固定随机种子生成的模拟数据，不包含真实企业、客户或交易信息。示例分析结论只用于展示方法和流程，不能代表真实经营表现。
 
@@ -13,6 +15,7 @@
 - [在线体验与页面预览](#在线体验与页面预览)
 - [产品功能](#产品功能)
 - [选择使用方式](#选择使用方式)
+- [在 Codex 中使用](#在-codex-中使用)
 - [快速开始](#快速开始)
 - [上传文件格式](#上传文件格式)
 - [指标口径与数据限制](#指标口径与数据限制)
@@ -24,7 +27,7 @@
 
 ## 在线体验与页面预览
 
-**GitHub Pages 在线 Demo：** [https://l-sd.github.io/ecommerce-analytics-agent/](https://l-sd.github.io/ecommerce-analytics-agent/)（无需登录）
+**GitHub Pages 在线 Demo：** [https://l-sd.github.io/ecommerce-analytics-toolkit/](https://l-sd.github.io/ecommerce-analytics-toolkit/)（无需登录）
 
 ![电商订单分析工作台：经营总览页面预览](docs/dashboard-preview.png)
 
@@ -80,9 +83,22 @@ Streamlit 版使用同一套 Python 分析模块，提供六个工作流标签�
 
 | 使用方式 | 适合场景 | 上传格式 |
 | --- | --- | --- |
-| [GitHub Pages 在线 Demo](https://l-sd.github.io/ecommerce-analytics-agent/) | 快速体验分析页面、用小型文件试用 | CSV/TSV，最大 20 MB，在浏览器本地解析 |
+| [GitHub Pages 在线 Demo](https://l-sd.github.io/ecommerce-analytics-toolkit/) | 快速体验分析页面、用小型文件试用 | CSV/TSV，最大 20 MB，在浏览器本地解析 |
 | Streamlit 仪表盘 | 在本机使用完整交互分析、上传 Excel | CSV/XLSX，由运行 Streamlit 的 Python 进程处理 |
 | 命令行流水线 | 批量处理、生成 Excel/HTML 报告、纳入自动化任务 | CSV/XLSX；也支持独立的订单级导出模式 |
+| Codex 项目 Skill | 在 AI 对话中调用本项目的本地分析流程 | CSV/XLSX，由当前本机 Python 环境处理 |
+
+## 在 Codex 中使用
+
+仓库包含项目级 Skill：`.agents/skills/ecommerce-analytics/SKILL.md`。在 Codex 中打开本仓库后，可直接要求分析一份订单文件；Skill 会调用现有命令行流水线，并检查清洗记录、指标口径和验证结果。
+
+```text
+使用电商经营分析 Skill 分析 D:\data\orders.xlsx，说明数据质量问题和核心指标，并生成报告。
+```
+
+结果写入 `artifacts/ai-analysis/` 下的新目录，不覆盖原始订单文件或已有分析结果。若当前 Python 环境没有安装本项目及其依赖，请按“快速开始”完成本地安装后再使用。
+
+此 Skill 依赖当前 Codex 工作区访问文件和运行本地 Python；它不上传订单数据。要让 ChatGPT 网页版脱离此仓库独立调用，需要另行部署带鉴权的 MCP 服务和文件传输流程。
 
 ## 快速开始
 
@@ -255,6 +271,9 @@ GitHub Actions 在 Ubuntu、Windows、macOS 和 Python 3.11、3.12、3.13 的组
 
 ```text
 app.py                          # Streamlit 交互式仪表盘
+.agents/skills/ecommerce-analytics/
+  SKILL.md                      # Codex 项目级电商经营分析 Skill
+scripts/run_analysis.py         # 从源码目录调用现有 CLI 的轻量启动脚本
 src/ecommerce_analytics/
   analysis/                     # 经营总览、销售、流量、用户、履约分析模块
   demo_data.py                  # 固定种子模拟订单、流量和商品目录生成器
